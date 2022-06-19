@@ -1,0 +1,44 @@
+name: Node.js CI
+on: [push]
+jobs:
+  MainBuild:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      uses: Borales/actions-yarn@v2.3.0
+    - name: Build
+      run: |
+        cd ${{ github.workspace }}/main
+        yarn
+        yarn run build
+  UsersMicroservice:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      uses: Borales/actions-yarn@v2.3.0
+    - name: Build
+      run: |
+        cd ${{ github.workspace }}/microservices/users
+        yarn
+        yarn run build
+        yarn run test
+  FilesMicroservice:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      uses: Borales/actions-yarn@v2.3.0
+    - name: Build
+      run: |
+        cd ${{ github.workspace }}/microservices/files
+        yarn
+        yarn run build
+        yarn run test

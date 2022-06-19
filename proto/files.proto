@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package files;
+
+service FilesService {
+  rpc Create (File) returns (File) {}
+  rpc FindAll (stream Empty) returns (stream File) {}
+  rpc FindOneById (FileById) returns (File) {}
+  rpc FindFilesByUserId (stream FileById) returns (stream File) {}
+  rpc Update (UpdateResponse) returns (File) {}
+  rpc Delete (FileById) returns (Empty) {}
+}
+
+message Empty {
+}
+
+message FileById {
+  int32 id = 1;
+}
+
+message UpdateResponse {
+  int32 id = 1;
+  File file = 2;
+}
+
+message File {
+  int32 id = 1;
+  string file_name = 2;
+  int32 created_by = 3;
+  string created_at = 4;
+  string updated_at = 5;
+}

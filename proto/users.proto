@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package users;
+
+service UsersService {
+  rpc Create (User) returns (User) {}
+  rpc FindAll (stream Empty) returns (stream User) {}
+  rpc FindOneById (UserById) returns (User) {}
+  rpc Update (UpdateResponse) returns (User) {}
+  rpc Delete (UserById) returns (Empty) {}
+}
+
+message Empty {
+}
+
+message UserById {
+  int32 id = 1;
+}
+
+message UpdateResponse {
+  int32 id = 1;
+  User user = 2;
+}
+
+message User {
+  int32 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string gender = 5;
+  string ip_address = 6;
+}
